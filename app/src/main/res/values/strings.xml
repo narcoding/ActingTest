@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">Acting Aptitude Testing</string>
+    <string name="subscription_key">8875afef3ee04c039e406793e7edee48</string>
+
+    <string name="pekiyi">CONGRATULATIONS! \n You have excellent ACTING APTITUDE \n %</string>
+    <string name="iyi">SATISFACTORY! \n YOUR ACTING APTITUDE: %</string>
+    <string name="orta">NICE! \n YOUR ACTING APTITUDE: %</string>
+    <string name="zayif">You need to work a little more! \n YOUR ACTING APTITUDE: %</string>
+    <string name="kotu">HORRIBLE! \n YOUR ACTING APTITUDE: %</string>
+
+
+    <string name="lets">Let\'s test your acting \n Are you ready?</string>
+    <string name="btnstart">START!</string>
+
+    <string name="takeselfie">Take a selfie expressing\n</string>
+
+    <string name="happiness">HAPPINESS</string>
+    <string name="anger">ANGER</string>
+    <string name="contempt">CONTEMPT</string>
+    <string name="disgust">DISGUST</string>
+    <string name="fear">FEAR</string>
+    <string name="neutral">NEUTRAL</string>
+    <string name="sadness">SADNESS</string>
+    <string name="surprise">SURPRISE</string>
+
+
+    <string name="bekle">Please Wait!</string>
+    <string name="hesaplaniyor">Calculating...</string>
+
+    <string name="alone">Please take a selfie alone!</string>
+
+    <string name="tekrar">TRY AGAIN!</string>
+
+    <string name="pick_image_intent_text">Pick Image</string>
+
+    <string name="runtimepermission">Permissions Check!</string>
+    <string name="okey">OK</string>
+    <string name="cancel">Cancel</string>
+</resources>

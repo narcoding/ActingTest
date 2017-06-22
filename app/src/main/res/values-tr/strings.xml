@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">Oyunculuk Yeteneği Testi</string>
+    <string name="subscription_key">8875afef3ee04c039e406793e7edee48</string>
+
+    <string name="pekiyi">MÜKEMMEL! \n Müthiş bir Oyunculuk Yeteneğine Sahipsiniz \n ORAN %</string>
+    <string name="iyi">ÇOK İYİ! \n OYUNCULUK YETENEĞİ ORANINIZ: %</string>
+    <string name="orta">İYİ! \n OYUNCULUK YETENEĞİ ORANINIZ: %</string>
+    <string name="zayif">Biraz daha çalışmanız gerek! \n OYUNCULUK YETENEĞİ ORANINIZ: %</string>
+    <string name="kotu">Korkunç! \n Berbat bir oyuncusunuz.\n OYUNCULUK YETENEĞİ ORANINIZ: %</string>
+
+    <string name="lets">Oyunculuk Yeteneğinizi Test Edin! \n HAZIR MISINIZ?</string>
+    <string name="btnstart">BAŞLA!</string>
+
+    <string name="takeselfie">Selfie çekiniz:\n</string>
+
+    <string name="happiness">MUTLULUK</string>
+    <string name="anger">KIZGINLIK</string>
+    <string name="contempt">AŞAĞILAMA</string>
+    <string name="disgust">İĞRENME</string>
+    <string name="fear">KORKU</string>
+    <string name="neutral">İFADESİZ</string>
+    <string name="sadness">ÜZGÜN</string>
+    <string name="surprise">ŞAŞKIN</string>
+
+    <string name="bekle">Lütfen Bekleyin!</string>
+    <string name="hesaplaniyor">Hesaplanıyor...</string>
+
+    <string name="alone">Lütfen yalnız selfie çekiniz!</string>
+
+    <string name="tekrar">TEKRAR DENE!</string>
+
+    <string name="pick_image_intent_text">Kamera</string>
+
+    <string name="runtimepermission">İzin kontrolü!</string>
+    <string name="okey">Evet!</string>
+    <string name="cancel">Geri</string>
+
+</resources>
