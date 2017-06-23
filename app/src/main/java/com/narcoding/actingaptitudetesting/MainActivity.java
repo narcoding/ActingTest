@@ -1,26 +1,45 @@
 package com.narcoding.actingaptitudetesting;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import junit.framework.Test;
 
+import java.io.File;
+
 public class MainActivity extends AppCompatActivity {
     TextView textView;
-
     Button btn_basla;
+    LinearLayout llmain;
 
     double happiness, sadness, surprise, fear, anger, neutral, contempt, disgust=0.0;
 
+    String savedname="actingtest";
+
+    String[] emos;
 
     private void init(){
         textView= (TextView) findViewById(R.id.textView);
-
         btn_basla= (Button) findViewById(R.id.btn_basla);
+        llmain= (LinearLayout) findViewById(R.id.llmain);
+        emos= new String[]{
+                getString(R.string.happiness)
+                , getString(R.string.sadness)
+                , getString(R.string.surprise)
+                , getString(R.string.fear)
+                , getString(R.string.anger)
+                , getString(R.string.neutral)
+                , getString(R.string.contempt)
+                , getString(R.string.disgust)
+        };
     }
 
     @Override
@@ -28,6 +47,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();
+
+        for (int t=0;t<emos.length;t++){
+            ImageView img = new ImageView(this);
+            if(getImages(t)!=null) {
+                textView.setVisibility(View.GONE);
+                img.setImageBitmap(getImages(t));
+                llmain.addView(img);
+            }
+        }
+
 
         double ortalama=getIntent().getDoubleExtra("ortalama",0);
         happiness=getIntent().getDoubleExtra("happiness",0);
@@ -129,13 +158,19 @@ public class MainActivity extends AppCompatActivity {
         btn_basla.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,TestingActivity.class));
+                //startActivity(new Intent(MainActivity.this,TestingActivity.class));
+                startActivity(new Intent(MainActivity.this,MakeTestActivity.class));
 
-                finish();
+                //finish();
             }
         });
 
     }
 
+    private Bitmap getImages(int k){
+        File f = new File("/mnt/sdcard/"+savedname+emos[k].toLowerCase()+".jpg");
+        Bitmap bmp = BitmapFactory.decodeFile(f.getAbsolutePath());
+        return bmp;
+    }
 
 }

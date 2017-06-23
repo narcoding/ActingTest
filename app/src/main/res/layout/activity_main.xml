@@ -7,6 +7,7 @@
     tools:context="com.narcoding.actingaptitudetesting.MainActivity">
 
     <LinearLayout
+        android:id="@+id/llmain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
