@@ -1,8 +1,9 @@
 package com.narcoding.actingaptitudetesting;
 
-
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.hardware.Camera;
 import android.hardware.Camera.PictureCallback;
 import android.hardware.Camera.ShutterCallback;
@@ -12,13 +13,26 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.narcoding.actingaptitudetesting.Model.Emoge;
+import com.narcoding.actingaptitudetesting.emotion.contract.RecognizeResult;
+import com.narcoding.actingaptitudetesting.emotion.rest.EmotionServiceException;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+
+import static com.narcoding.actingaptitudetesting.MainActivity.emogesList;
+import static com.narcoding.actingaptitudetesting.MainActivity.emos;
+import static com.narcoding.actingaptitudetesting.MainActivity.emoslowercase;
+import static com.narcoding.actingaptitudetesting.MainActivity.savedname;
 
 public class MakeTestActivity extends AppCompatActivity implements SurfaceHolder.Callback {
 
@@ -30,13 +44,12 @@ public class MakeTestActivity extends AppCompatActivity implements SurfaceHolder
     PictureCallback rawCallback,jpegCallback;
     ShutterCallback shutterCallback;
 
+
     int i=0;
     int m=0;
-    String savedname="actingtest";
 
     int time=5;
 
-    String[] emos;
 
     Thread thread;
 
@@ -45,16 +58,6 @@ public class MakeTestActivity extends AppCompatActivity implements SurfaceHolder
         txt_cam_emo= (TextView) findViewById(R.id.txt_cam_emo);
         txt_cam_time= (TextView) findViewById(R.id.txt_cam_time);
 
-        emos= new String[]{
-                getString(R.string.happiness)
-                , getString(R.string.sadness)
-                , getString(R.string.surprise)
-                , getString(R.string.fear)
-                , getString(R.string.anger)
-                , getString(R.string.neutral)
-                , getString(R.string.contempt)
-                , getString(R.string.disgust)
-        };
 
         surfaceHolder = sv.getHolder();
         surfaceHolder.addCallback(this);
@@ -77,7 +80,7 @@ public class MakeTestActivity extends AppCompatActivity implements SurfaceHolder
                 FileOutputStream outStream = null;
                 try {
                     //outStream = new FileOutputStream(String.format("/sdcard/%d.jpg", System.currentTimeMillis()));
-                    outStream = new FileOutputStream(String.format("/sdcard/%s.jpg", savedname+emos[m-1].toLowerCase()));
+                    outStream = new FileOutputStream(String.format("/sdcard/%s.jpg", savedname+emoslowercase[m-1]));
                     outStream.write(data);
                     outStream.close();
                     Log.d("Log", "onPictureTaken - wrote bytes: " + data.length);
@@ -97,7 +100,6 @@ public class MakeTestActivity extends AppCompatActivity implements SurfaceHolder
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_test);
         init();
-
 
 
     }
@@ -167,6 +169,7 @@ public class MakeTestActivity extends AppCompatActivity implements SurfaceHolder
     public void surfaceCreated(SurfaceHolder holder) {
         start_camera();
         runThread();
+
     }
 
     @Override
@@ -200,7 +203,7 @@ public class MakeTestActivity extends AppCompatActivity implements SurfaceHolder
         thread= new Thread(){
             public void run(){
 
-                while (i++< 45){
+                while (i++< 40){
                     try {
                         runOnUiThread(new Runnable() {
                             @Override
@@ -208,9 +211,9 @@ public class MakeTestActivity extends AppCompatActivity implements SurfaceHolder
 
                                 if(i>0){
                                     txt_cam_time.setText(time-i%5+"");
-                                    if(i%5==0&&m<8){
+                                    if(i%5==0&&m<emos.length){
                                         captureImage();
-                                        if(m<7)
+                                        if(m<emos.length-1)
                                             txt_cam_emo.setText(emos[m+1]);
                                         m++;
                                     }else {
@@ -221,7 +224,6 @@ public class MakeTestActivity extends AppCompatActivity implements SurfaceHolder
                                     txt_cam_time.setText(time-i+"");
                                 }
 
-
                             }
                         });
                         Thread.sleep(1000);
@@ -231,10 +233,16 @@ public class MakeTestActivity extends AppCompatActivity implements SurfaceHolder
                     }
                 }
 
+                startActivity(new Intent(MakeTestActivity.this,MainActivity.class).putExtra("girissayisi",1));
+
             }
         };
         thread.start();
 
     }
+
+
+
+
 
 }

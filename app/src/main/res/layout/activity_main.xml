@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.narcoding.actingaptitudetesting.MainActivity">
 
     <LinearLayout
@@ -12,31 +14,58 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@color/colorTurquise"
-        android:paddingBottom="8dp">
+        android:paddingBottom="8dp"
+        android:gravity="center">
 
-    <TextView
-        android:id="@+id/textView"
-        android:paddingTop="100dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="100dp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="@string/lets"
-        android:textSize="24sp"
-        android:layout_weight="0.1"
-        android:textColor="@color/colorPrimaryDark"/>
+        <TableLayout
+            android:id="@+id/tbllayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="30dp">
 
-    <Button
-        android:id="@+id/btn_basla"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_weight="0.1"
-        android:background="@color/colorPrimary"
-        android:text="@string/btnstart"
-        android:textSize="20sp"
-        android:textColor="@color/colorWhite"/>
+        </TableLayout>
+
+
+        <TextView
+            android:id="@+id/textView"
+            android:paddingTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/lets"
+            android:textSize="24sp"
+            android:textColor="@color/colorPrimaryDark"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1.0">
+            <Button
+                android:id="@+id/btn_basla"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/colorPrimary"
+                android:text="@string/btnstart"
+                android:textSize="20sp"
+                android:textColor="@color/colorWhite"
+                android:layout_weight="0.1"/>
+
+            <ImageButton
+                android:id="@+id/imgbtn_paylas"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/share"
+                android:layout_weight="0.9"
+                android:visibility="gone"/>
+
+</LinearLayout>
     </LinearLayout>
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

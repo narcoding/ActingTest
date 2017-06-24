@@ -23,6 +23,21 @@
     <string name="sadness">SADNESS</string>
     <string name="surprise">SURPRISE</string>
 
+    <string name="happinessLC">happiness</string>
+    <string name="angerLC">anger</string>
+    <string name="contemptLC">contempt</string>
+    <string name="disgustLC">disgust</string>
+    <string name="fearLC">fear</string>
+    <string name="neutralLC">neutral</string>
+    <string name="sadnessLC">sadness</string>
+    <string name="surpriseLC">surprise</string>
+
+
+    <string name="sharewith">Share With</string>
+    <string name="sharebody">In Acting Aptitude Testing App, My highest score with screen shot</string>
+    <string name="sharescore">My Acting Test Score</string>
+    <string name="shareapplink">https://play.google.com/store/apps/details?id=com.narcoding.actingaptitudetesting</string>
+
 
     <string name="bekle">Please Wait!</string>
     <string name="hesaplaniyor">Calculating...</string>

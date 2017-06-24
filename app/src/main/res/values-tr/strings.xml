@@ -22,6 +22,21 @@
     <string name="sadness">ÜZGÜN</string>
     <string name="surprise">ŞAŞKIN</string>
 
+
+    <string name="happinessLC">happiness</string>
+    <string name="angerLC">anger</string>
+    <string name="contemptLC">contempt</string>
+    <string name="disgustLC">disgust</string>
+    <string name="fearLC">fear</string>
+    <string name="neutralLC">neutral</string>
+    <string name="sadnessLC">sadness</string>
+    <string name="surpriseLC">surprise</string>
+
+    <string name="sharewith">Şununla Paylaş</string>
+    <string name="sharebody">Oyunculuk Yeteneği Testi Uygulamasında En Yüksek Skorum</string>
+    <string name="sharescore">Oyunculuk Yeteneği Skorum</string>
+    <string name="shareapplink">https://play.google.com/store/apps/details?id=com.narcoding.actingaptitudetesting</string>
+
     <string name="bekle">Lütfen Bekleyin!</string>
     <string name="hesaplaniyor">Hesaplanıyor...</string>
 
