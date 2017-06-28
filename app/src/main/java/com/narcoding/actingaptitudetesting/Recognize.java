@@ -1,13 +1,10 @@
 package com.narcoding.actingaptitudetesting;
 
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.narcoding.actingaptitudetesting.Model.Emoge;
@@ -21,8 +18,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.List;
 
-import static com.narcoding.actingaptitudetesting.MainActivity.emogesList;
-import static com.narcoding.actingaptitudetesting.MainActivity.rotate;
+import static com.narcoding.actingaptitudetesting.View.MainActivity.rotate;
 
 /**
  * Created by Belgeler on 24.06.2017.

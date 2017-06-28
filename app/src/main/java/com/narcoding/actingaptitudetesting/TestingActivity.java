@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 
 import com.google.gson.Gson;
+import com.narcoding.actingaptitudetesting.View.MainActivity;
 import com.narcoding.actingaptitudetesting.emotion.EmotionServiceClient;
 import com.narcoding.actingaptitudetesting.emotion.EmotionServiceRestClient;
 import com.narcoding.actingaptitudetesting.emotion.contract.RecognizeResult;

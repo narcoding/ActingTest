@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.webkit.WebView;
 
+import com.narcoding.actingaptitudetesting.View.MainActivity;
+
 public class SplashScreen extends AppCompatActivity {
 
     @Override

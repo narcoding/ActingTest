@@ -1,38 +1,28 @@
-package com.narcoding.actingaptitudetesting;
+package com.narcoding.actingaptitudetesting.View;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
 import android.hardware.Camera;
 import android.hardware.Camera.PictureCallback;
 import android.hardware.Camera.ShutterCallback;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.narcoding.actingaptitudetesting.Model.Emoge;
-import com.narcoding.actingaptitudetesting.emotion.contract.RecognizeResult;
-import com.narcoding.actingaptitudetesting.emotion.rest.EmotionServiceException;
+import com.narcoding.actingaptitudetesting.MyApp;
+import com.narcoding.actingaptitudetesting.R;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
-import static com.narcoding.actingaptitudetesting.MainActivity.emogesList;
-import static com.narcoding.actingaptitudetesting.MainActivity.emos;
-import static com.narcoding.actingaptitudetesting.MainActivity.emoslowercase;
-import static com.narcoding.actingaptitudetesting.MainActivity.savedname;
+import static com.narcoding.actingaptitudetesting.MyApp.emos;
+import static com.narcoding.actingaptitudetesting.MyApp.emoslowercase;
+import static com.narcoding.actingaptitudetesting.View.MainActivity.savedname;
 
 public class MakeTestActivity extends AppCompatActivity implements SurfaceHolder.Callback {
 
@@ -54,6 +44,7 @@ public class MakeTestActivity extends AppCompatActivity implements SurfaceHolder
     Thread thread;
 
     private void init(){
+        MyApp.init(this);
         sv= (SurfaceView) findViewById(R.id.sv);
         txt_cam_emo= (TextView) findViewById(R.id.txt_cam_emo);
         txt_cam_time= (TextView) findViewById(R.id.txt_cam_time);

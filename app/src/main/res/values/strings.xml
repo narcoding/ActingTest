@@ -51,4 +51,6 @@
     <string name="runtimepermission">Permissions Check!</string>
     <string name="okey">OK</string>
     <string name="cancel">Cancel</string>
+
+
 </resources>

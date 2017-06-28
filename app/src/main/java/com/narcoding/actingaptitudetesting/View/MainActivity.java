@@ -1,7 +1,7 @@
-package com.narcoding.actingaptitudetesting;
+package com.narcoding.actingaptitudetesting.View;
 
+import android.Manifest;
 import android.app.ProgressDialog;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -10,8 +10,8 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Environment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -26,6 +26,8 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.narcoding.actingaptitudetesting.Model.Emoge;
+import com.narcoding.actingaptitudetesting.MyApp;
+import com.narcoding.actingaptitudetesting.R;
 import com.narcoding.actingaptitudetesting.emotion.EmotionServiceClient;
 import com.narcoding.actingaptitudetesting.emotion.EmotionServiceRestClient;
 import com.narcoding.actingaptitudetesting.emotion.contract.RecognizeResult;
@@ -41,12 +43,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+import static com.narcoding.actingaptitudetesting.MyApp.emos;
+import static com.narcoding.actingaptitudetesting.MyApp.emoslowercase;
+
+public class MainActivity extends RuntimePermissionsActivity {
     TextView textView;
     Button btn_basla;
     ImageButton imgbtn_paylas;
     LinearLayout llmain;
     TableLayout tbllayout;
+
+    private static final int REQUEST_PERMISSIONS = 20;
 
     private ProgressDialog progressBar;
 
@@ -54,8 +61,6 @@ public class MainActivity extends AppCompatActivity {
 
     public static String savedname="actingtest";
 
-    public static String[] emos;
-    public static String[] emoslowercase;
     public static ArrayList<Emoge> emogesList;
 
     int z=0;
@@ -64,33 +69,16 @@ public class MainActivity extends AppCompatActivity {
     File shareimagePath;
 
     private void init(){
+        MyApp.init(this);
+
         textView= (TextView) findViewById(R.id.textView);
         btn_basla= (Button) findViewById(R.id.btn_basla);
         imgbtn_paylas= (ImageButton) findViewById(R.id.imgbtn_paylas);
         llmain= (LinearLayout) findViewById(R.id.llmain);
         tbllayout= (TableLayout) findViewById(R.id.tbllayout);
 
-        emos= new String[]{
-                getString(R.string.happiness)
-                , getString(R.string.sadness)
-                , getString(R.string.surprise)
-                , getString(R.string.fear)
-                , getString(R.string.anger)
-                , getString(R.string.neutral)
-                , getString(R.string.contempt)
-                , getString(R.string.disgust)
-        };
 
-        emoslowercase= new String[]{
-                getString(R.string.happinessLC)
-                , getString(R.string.sadnessLC)
-                , getString(R.string.surpriseLC)
-                , getString(R.string.fearLC)
-                , getString(R.string.angerLC)
-                , getString(R.string.neutralLC)
-                , getString(R.string.contemptLC)
-                , getString(R.string.disgustLC)
-        };
+
 
         emogesList=new ArrayList<>();
 
@@ -165,6 +153,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();
+
+        if (Build.VERSION.SDK_INT >= 23) {
+            MainActivity.super.requestAppPermissions(new
+                            String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            Manifest.permission.CAMERA},
+                    R.string.runtimepermission
+                    , REQUEST_PERMISSIONS);
+        }
+
         if(getIntent().getIntExtra("girissayisi",0)!=-1){
         girissayisi=getIntent().getIntExtra("girissayisi",0);
         }
@@ -299,6 +297,11 @@ public class MainActivity extends AppCompatActivity {
                 //finish();
             }
         });
+
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode) {
 
     }
 
