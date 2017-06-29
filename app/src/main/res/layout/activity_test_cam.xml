@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.narcoding.actingaptitudetesting.View.TestCamActivity">
+
+    <SurfaceView
+        android:id="@+id/sv_testcam"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:id="@+id/ll_sure"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:weightSum="1"
+        android:background="@drawable/custombg"
+        android:visibility="gone">
+        <TextView
+            android:id="@+id/txt_emo"
+            android:text="mutluluk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/colorWhite"
+            android:textSize="20sp"
+            android:layout_weight="0.1"/>
+        <TextView
+            android:id="@+id/txt_sure"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="5"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="30sp"
+            android:layout_weight="0.9"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_sf"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="@drawable/custombg">
+
+        <TextView
+            android:id="@+id/txt_tca"
+            android:paddingTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/lets"
+            android:textSize="24sp"
+            android:textColor="@color/colorWhite"/>
+        <Button
+            android:id="@+id/btn_go"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@color/colorPrimary"
+            android:text="@string/btnstart"
+            android:textSize="20sp"
+            android:textColor="@color/colorWhite"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_takeselfie"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="@drawable/custombg"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/txt_takeselfie"
+            android:paddingTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="24sp"
+            android:textColor="@color/colorWhite"/>
+        <Button
+            android:id="@+id/btn_takeselfie"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="@string/okey"
+            android:textColor="@color/colorWhite"
+            android:textSize="20sp"
+            android:background="@color/colorPrimary"/>
+    </LinearLayout>
+
+</FrameLayout>

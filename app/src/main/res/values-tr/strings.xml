@@ -47,7 +47,7 @@
     <string name="pick_image_intent_text">Kamera</string>
 
     <string name="runtimepermission">İzin kontrolü!</string>
-    <string name="okey">Evet!</string>
+    <string name="okey">Tamam</string>
     <string name="cancel">Geri</string>
 
 </resources>

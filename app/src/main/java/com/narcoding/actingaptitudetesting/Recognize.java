@@ -18,7 +18,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.List;
 
-import static com.narcoding.actingaptitudetesting.View.MainActivity.rotate;
+import static com.narcoding.actingaptitudetesting.MyApp.rotate;
+
 
 /**
  * Created by Belgeler on 24.06.2017.
@@ -129,15 +130,11 @@ public class Recognize extends AsyncTask<Emoge, String, List<RecognizeResult>> {
 
                     }
 
-
-
                 }
                 //mEditText.setSelection(0);
             }
 
         }
-
-
 
     private List<RecognizeResult> processWithAutoFaceDetection(String url) throws EmotionServiceException, IOException {
         Log.d("emotion", "Start emotion detection with auto-face detection");
@@ -198,8 +195,5 @@ public class Recognize extends AsyncTask<Emoge, String, List<RecognizeResult>> {
             emo.setHeight(options.outHeight);
             return mbitmap;
         }
-
     }
-
-
 }

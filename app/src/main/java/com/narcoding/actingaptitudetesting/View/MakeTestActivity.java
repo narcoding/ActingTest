@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.narcoding.actingaptitudetesting.MyApp;
 import com.narcoding.actingaptitudetesting.R;
@@ -22,7 +23,7 @@ import java.util.List;
 
 import static com.narcoding.actingaptitudetesting.MyApp.emos;
 import static com.narcoding.actingaptitudetesting.MyApp.emoslowercase;
-import static com.narcoding.actingaptitudetesting.View.MainActivity.savedname;
+import static com.narcoding.actingaptitudetesting.MyApp.savedname;
 
 public class MakeTestActivity extends AppCompatActivity implements SurfaceHolder.Callback {
 
@@ -48,7 +49,6 @@ public class MakeTestActivity extends AppCompatActivity implements SurfaceHolder
         sv= (SurfaceView) findViewById(R.id.sv);
         txt_cam_emo= (TextView) findViewById(R.id.txt_cam_emo);
         txt_cam_time= (TextView) findViewById(R.id.txt_cam_time);
-
 
         surfaceHolder = sv.getHolder();
         surfaceHolder.addCallback(this);
@@ -97,7 +97,13 @@ public class MakeTestActivity extends AppCompatActivity implements SurfaceHolder
 
     private void captureImage() {
         // TODO Auto-generated method stub
-        camera.takePicture(shutterCallback, rawCallback, jpegCallback);
+        try {
+            camera.takePicture(shutterCallback, rawCallback, jpegCallback);
+        }catch (RuntimeException r){
+            r.printStackTrace();
+            Log.e("cameratake",r.getMessage());
+
+        }
 
     }
 
@@ -158,14 +164,14 @@ public class MakeTestActivity extends AppCompatActivity implements SurfaceHolder
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        start_camera();
-        runThread();
+
 
     }
 
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-
+        start_camera();
+        runThread();
     }
 
     @Override
@@ -173,20 +179,12 @@ public class MakeTestActivity extends AppCompatActivity implements SurfaceHolder
 
     }
 
-    public static int getScreenWidth() {
-        return Resources.getSystem().getDisplayMetrics().widthPixels;
-    }
-
-    public static int getScreenHeight() {
-        return Resources.getSystem().getDisplayMetrics().heightPixels;
-    }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         stop_camera();
         finish();
-
     }
 
     private void runThread(){
@@ -204,6 +202,7 @@ public class MakeTestActivity extends AppCompatActivity implements SurfaceHolder
                                     txt_cam_time.setText(time-i%5+"");
                                     if(i%5==0&&m<emos.length){
                                         captureImage();
+                                        Toast.makeText(MakeTestActivity.this,"çekildi",Toast.LENGTH_SHORT).show();
                                         if(m<emos.length-1)
                                             txt_cam_emo.setText(emos[m+1]);
                                         m++;

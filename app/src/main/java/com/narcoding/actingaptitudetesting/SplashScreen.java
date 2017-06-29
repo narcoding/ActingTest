@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.webkit.WebView;
 
 import com.narcoding.actingaptitudetesting.View.MainActivity;
+import com.narcoding.actingaptitudetesting.View.TestCamActivity;
 
 public class SplashScreen extends AppCompatActivity {
 
@@ -30,10 +31,10 @@ public class SplashScreen extends AppCompatActivity {
                 } catch (InterruptedException e) {
 
                 } finally {
-                    finish();
+                    //finish();
 
                     Intent intent = new Intent();
-                    intent.setClass(getApplicationContext(), MainActivity.class);
+                    intent.setClass(getApplicationContext(), TestCamActivity.class);
                     startActivity(intent);
                     finish();
                 }

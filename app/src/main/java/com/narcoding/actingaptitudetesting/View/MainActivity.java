@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -40,11 +39,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
-import static com.narcoding.actingaptitudetesting.MyApp.emos;
-import static com.narcoding.actingaptitudetesting.MyApp.emoslowercase;
+import static com.narcoding.actingaptitudetesting.MyApp.REQUEST_PERMISSIONS;
+import static com.narcoding.actingaptitudetesting.MyApp.emogesList;
+import static com.narcoding.actingaptitudetesting.MyApp.rotate;
+import static com.narcoding.actingaptitudetesting.MyApp.savedname;
 
 public class MainActivity extends RuntimePermissionsActivity {
     TextView textView;
@@ -53,15 +53,7 @@ public class MainActivity extends RuntimePermissionsActivity {
     LinearLayout llmain;
     TableLayout tbllayout;
 
-    private static final int REQUEST_PERMISSIONS = 20;
-
     private ProgressDialog progressBar;
-
-    double happiness, sadness, surprise, fear, anger, neutral, contempt, disgust=0.0;
-
-    public static String savedname="actingtest";
-
-    public static ArrayList<Emoge> emogesList;
 
     int z=0;
     int girissayisi=0;
@@ -76,21 +68,6 @@ public class MainActivity extends RuntimePermissionsActivity {
         imgbtn_paylas= (ImageButton) findViewById(R.id.imgbtn_paylas);
         llmain= (LinearLayout) findViewById(R.id.llmain);
         tbllayout= (TableLayout) findViewById(R.id.tbllayout);
-
-
-
-
-        emogesList=new ArrayList<>();
-
-        for(int e=0;e<emoslowercase.length;e++){
-            Emoge tempEmoge=new Emoge();
-            tempEmoge.setEmotion(emos[e]);
-            tempEmoge.setUrl(savedname+emoslowercase[e]);
-            tempEmoge.setName(emoslowercase[e]);
-            tempEmoge.setWidth(0);
-            tempEmoge.setHeight(0);
-            emogesList.add(tempEmoge);
-        }
 
         imgbtn_paylas.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,16 +114,6 @@ public class MainActivity extends RuntimePermissionsActivity {
         startActivity(Intent.createChooser(sharingIntent, getString(R.string.sharewith)));
     }
 
-
-    public static Bitmap rotate(Bitmap bm, int rotation) {
-        if (rotation != 0) {
-            Matrix matrix = new Matrix();
-            matrix.postRotate(rotation);
-            Bitmap bmOut = Bitmap.createBitmap(bm, 0, 0, bm.getWidth(), bm.getHeight(), matrix, true);
-            return bmOut;
-        }
-        return bm;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -464,7 +431,6 @@ public class MainActivity extends RuntimePermissionsActivity {
 
     class Recognize extends AsyncTask<Emoge, String, List<RecognizeResult>> {
 
-
         private EmotionServiceClient client;
         private Emoge emo=new Emoge();
         // Store error message
@@ -647,7 +613,5 @@ public class MainActivity extends RuntimePermissionsActivity {
 
 
     }
-
-
 
 }
