@@ -1,11 +1,10 @@
 package com.narcoding.actingaptitudetesting.View;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.hardware.Camera;
 import android.hardware.Camera.PictureCallback;
 import android.hardware.Camera.ShutterCallback;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.SurfaceHolder;
@@ -13,7 +12,6 @@ import android.view.SurfaceView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.narcoding.actingaptitudetesting.MyApp;
 import com.narcoding.actingaptitudetesting.R;
 
 import java.io.FileNotFoundException;
@@ -25,7 +23,7 @@ import static com.narcoding.actingaptitudetesting.MyApp.emos;
 import static com.narcoding.actingaptitudetesting.MyApp.emoslowercase;
 import static com.narcoding.actingaptitudetesting.MyApp.savedname;
 
-public class MakeTestActivity extends AppCompatActivity implements SurfaceHolder.Callback {
+public class MakeTestActivity extends Activity implements SurfaceHolder.Callback {
 
     SurfaceView sv;
     TextView txt_cam_emo,txt_cam_time;
@@ -45,7 +43,6 @@ public class MakeTestActivity extends AppCompatActivity implements SurfaceHolder
     Thread thread;
 
     private void init(){
-        MyApp.init(this);
         sv= (SurfaceView) findViewById(R.id.sv);
         txt_cam_emo= (TextView) findViewById(R.id.txt_cam_emo);
         txt_cam_time= (TextView) findViewById(R.id.txt_cam_time);

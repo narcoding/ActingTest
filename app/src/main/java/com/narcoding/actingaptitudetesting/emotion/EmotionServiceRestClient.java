@@ -33,10 +33,12 @@
 package com.narcoding.actingaptitudetesting.emotion;
 
 import com.google.gson.Gson;
+import com.microsoft.projectoxford.face.common.RequestMethod;
+import com.microsoft.projectoxford.face.rest.ClientException;
+import com.microsoft.projectoxford.face.rest.WebServiceRequest;
 import com.narcoding.actingaptitudetesting.emotion.contract.FaceRectangle;
 import com.narcoding.actingaptitudetesting.emotion.contract.RecognizeResult;
 import com.narcoding.actingaptitudetesting.emotion.rest.EmotionServiceException;
-import com.narcoding.actingaptitudetesting.emotion.rest.WebServiceRequest;
 
 
 import java.io.ByteArrayOutputStream;
@@ -48,7 +50,8 @@ import java.util.List;
 import java.util.Map;
 
 public class EmotionServiceRestClient implements EmotionServiceClient {
-    private static final String DEFAULT_API_ROOT = "https://westus.api.cognitive.microsoft.com/emotion/v1.0";
+    //private static final String DEFAULT_API_ROOT = "https://westus.api.cognitive.microsoft.com/emotion/v1.0";
+    private static final String DEFAULT_API_ROOT = "https://myfaceapinaim.cognitiveservices.azure.com/face/v1.0/";
     private static final String FACE_RECTANGLES = "faceRectangles";
     private final String apiRoot;
     private final WebServiceRequest restCall;
@@ -80,7 +83,12 @@ public class EmotionServiceRestClient implements EmotionServiceClient {
         params.clear();
         params.put("url", url);
 
-        String json = (String) this.restCall.post(uri, params, null, false);
+        String json = null;
+        try {
+            json = (String) this.restCall.request(uri, RequestMethod.POST, params, null);
+        } catch (ClientException | IOException e) {
+            e.printStackTrace();
+        }
         RecognizeResult[] recognizeResult = this.gson.fromJson(json, RecognizeResult[].class);
 
         return Arrays.asList(recognizeResult);
@@ -122,7 +130,12 @@ public class EmotionServiceRestClient implements EmotionServiceClient {
         //byte[] data = IOUtils.toByteArray(stream);
         params.put("data", data);
 
-        String json = (String) this.restCall.post(uri, params, "application/octet-stream", false);
+        String json = null;
+        try {
+            json = (String) this.restCall.request(uri, RequestMethod.POST, params, "application/octet-stream");
+        } catch (ClientException e) {
+            e.printStackTrace();
+        }
         RecognizeResult[] recognizeResult = this.gson.fromJson(json, RecognizeResult[].class);
 
         return Arrays.asList(recognizeResult);

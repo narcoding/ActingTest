@@ -108,7 +108,6 @@ public class ImagePicker {
             fileDescriptor = context.getContentResolver().openAssetFileDescriptor(theUri, "r");
         } catch (FileNotFoundException e) {
 
-            //MyApp.exception(e);
         }
 
         Bitmap actuallyUsableBitmap = BitmapFactory.decodeFileDescriptor(
@@ -169,7 +168,6 @@ public class ImagePicker {
             }
         } catch (Exception e) {
 
-            //MyApp.exception(e);
         }
         return rotate;
     }

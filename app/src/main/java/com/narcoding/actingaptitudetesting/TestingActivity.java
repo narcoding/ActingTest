@@ -1,10 +1,10 @@
 package com.narcoding.actingaptitudetesting;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,7 +24,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.List;
 
-public class TestingActivity extends AppCompatActivity {
+public class TestingActivity extends Activity {
 
     private static final int image_REQUEST = 0;
     ImagePicker imagePicker=new ImagePicker();
@@ -115,7 +115,7 @@ public class TestingActivity extends AppCompatActivity {
     }
 
 
-    private class doRequest extends AsyncTask<String, String, List<RecognizeResult>> {
+    public class doRequest extends AsyncTask<String, String, List<RecognizeResult>> {
         // Store error message
         private Exception e = null;
 

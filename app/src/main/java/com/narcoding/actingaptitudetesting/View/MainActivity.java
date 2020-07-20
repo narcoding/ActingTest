@@ -25,7 +25,6 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.narcoding.actingaptitudetesting.Model.Emoge;
-import com.narcoding.actingaptitudetesting.MyApp;
 import com.narcoding.actingaptitudetesting.R;
 import com.narcoding.actingaptitudetesting.emotion.EmotionServiceClient;
 import com.narcoding.actingaptitudetesting.emotion.EmotionServiceRestClient;
@@ -61,8 +60,6 @@ public class MainActivity extends RuntimePermissionsActivity {
     File shareimagePath;
 
     private void init(){
-        MyApp.init(this);
-
         textView= (TextView) findViewById(R.id.textView);
         btn_basla= (Button) findViewById(R.id.btn_basla);
         imgbtn_paylas= (ImageButton) findViewById(R.id.imgbtn_paylas);

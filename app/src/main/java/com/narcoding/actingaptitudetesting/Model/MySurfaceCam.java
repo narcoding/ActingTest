@@ -1,14 +1,15 @@
 package com.narcoding.actingaptitudetesting.Model;
 
-import android.content.Context;
 import android.hardware.Camera;
 import android.hardware.Camera.PictureCallback;
 import android.hardware.Camera.ShutterCallback;
+import android.os.Build;
+import android.os.Environment;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-import com.narcoding.actingaptitudetesting.MyApp;
+import com.narcoding.actingaptitudetesting.Controller.OnCaptureCompleted;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.util.List;
 
 import static com.narcoding.actingaptitudetesting.MyApp.emoslowercase;
+import static com.narcoding.actingaptitudetesting.MyApp.isPermissionsGranted;
 import static com.narcoding.actingaptitudetesting.MyApp.savedname;
 
 /**
@@ -24,20 +26,12 @@ import static com.narcoding.actingaptitudetesting.MyApp.savedname;
 
 public class MySurfaceCam implements SurfaceHolder.Callback {
 
-    public static Context con;
-    public static Camera cam;
-    public static SurfaceView sv;
-    public static SurfaceHolder surfaceHolder;
-    public static ShutterCallback shutterCallback;
-    public static PictureCallback rawCallback,jpegCallback;
+    private Camera cam;
+    private SurfaceHolder surfaceHolder;
+    private ShutterCallback shutterCallback;
+    private PictureCallback rawCallback, jpegCallback;
 
-
-
-    public MySurfaceCam(Context con, SurfaceView sv) {
-        MyApp.init(con);
-        this.con=con;
-        this.sv=sv;
-
+    public MySurfaceCam(SurfaceView sv) {
         shutterCallback = new ShutterCallback() {
             public void onShutter() {
                 Log.i("Log", "onShutter'd");
@@ -56,14 +50,14 @@ public class MySurfaceCam implements SurfaceHolder.Callback {
         surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
     }
 
-    public static void captureImage(final int emosListId) {
+    public void captureImage(final int emosListId, OnCaptureCompleted listener) {
 
         jpegCallback = new PictureCallback() {
             public void onPictureTaken(byte[] data, Camera camera) {
                 FileOutputStream outStream = null;
                 try {
                     //outStream = new FileOutputStream(String.format("/sdcard/%d.jpg", System.currentTimeMillis()));
-                    outStream = new FileOutputStream(String.format("/sdcard/%s.jpg", savedname+emoslowercase[emosListId]));
+                    outStream = new FileOutputStream(String.format(Environment.getExternalStorageDirectory().getPath()+"/%s.jpg", savedname + emoslowercase[emosListId]));
                     outStream.write(data);
                     outStream.close();
                     Log.d("Log", "onPictureTaken - wrote bytes: " + data.length);
@@ -72,6 +66,7 @@ public class MySurfaceCam implements SurfaceHolder.Callback {
                 } catch (IOException e) {
                     e.printStackTrace();
                 } finally {
+                    listener.onCaptured(true);
                 }
                 Log.d("Log", "onPictureTaken - jpeg");
             }
@@ -79,17 +74,21 @@ public class MySurfaceCam implements SurfaceHolder.Callback {
 
         // TODO Auto-generated method stub
         try {
+
+            if (cam == null){
+                start_camera();
+            }
+
             cam.takePicture(shutterCallback, rawCallback, jpegCallback);
-        }catch (RuntimeException r){
+        } catch (RuntimeException r) {
             r.printStackTrace();
-            Log.e("cameratake",r.getMessage());
+            Log.e("cameratake", r.getMessage());
 
         }
 
     }
 
-    public static void start_camera()
-    {
+    public void start_camera() {
         Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
         int cameraCount = Camera.getNumberOfCameras();
         for (int camIdx = 0; camIdx < cameraCount; camIdx++) {
@@ -103,8 +102,6 @@ public class MySurfaceCam implements SurfaceHolder.Callback {
             }
         }
 
-
-
         Camera.Parameters param;
         param = cam.getParameters();
 
@@ -117,9 +114,9 @@ public class MySurfaceCam implements SurfaceHolder.Callback {
         List<Camera.Size> sizeList = cam.getParameters().getSupportedPreviewSizes();
         bestSize = sizeList.get(0);
 
-        for(int i = 1; i < sizeList.size(); i++){
-            if((sizeList.get(i).width * sizeList.get(i).height) >
-                    (bestSize.width * bestSize.height)){
+        for (int i = 1; i < sizeList.size(); i++) {
+            if ((sizeList.get(i).width * sizeList.get(i).height) >
+                    (bestSize.width * bestSize.height)) {
                 bestSize = sizeList.get(i);
             }
         }
@@ -137,8 +134,7 @@ public class MySurfaceCam implements SurfaceHolder.Callback {
         }
     }
 
-    public static void stop_camera()
-    {
+    public void stop_camera() {
         cam.stopPreview();
         cam.release();
     }
@@ -150,7 +146,8 @@ public class MySurfaceCam implements SurfaceHolder.Callback {
 
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-        start_camera();
+        if (Build.VERSION.SDK_INT < 23 || isPermissionsGranted)
+            start_camera();
     }
 
     @Override

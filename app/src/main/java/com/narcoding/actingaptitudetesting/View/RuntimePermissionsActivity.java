@@ -1,16 +1,14 @@
 package com.narcoding.actingaptitudetesting.View;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.util.SparseIntArray;
 
 import com.narcoding.actingaptitudetesting.R;
@@ -20,11 +18,11 @@ import com.narcoding.actingaptitudetesting.R;
  * Created by Belgeler on 18.05.2017.
  */
 
-public abstract class RuntimePermissionsActivity extends AppCompatActivity {
+public abstract class RuntimePermissionsActivity extends Activity {
     private SparseIntArray mErrorString;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mErrorString = new SparseIntArray();
     }
@@ -78,8 +76,12 @@ public abstract class RuntimePermissionsActivity extends AppCompatActivity {
         int permissionCheck = PackageManager.PERMISSION_GRANTED;
         boolean shouldShowRequestPermissionRationale = false;
         for (String permission : requestedPermissions) {
-            permissionCheck = permissionCheck + ContextCompat.checkSelfPermission(this, permission);
-            shouldShowRequestPermissionRationale = shouldShowRequestPermissionRationale || ActivityCompat.shouldShowRequestPermissionRationale(this, permission);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                permissionCheck = permissionCheck + checkSelfPermission(permission);
+            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                shouldShowRequestPermissionRationale = shouldShowRequestPermissionRationale || shouldShowRequestPermissionRationale(permission);
+            }
         }
         if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
             if (shouldShowRequestPermissionRationale) {
@@ -92,7 +94,9 @@ public abstract class RuntimePermissionsActivity extends AppCompatActivity {
                         .setPositiveButton(getResources().getString(R.string.okey),
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int id) {
-                                        ActivityCompat.requestPermissions(RuntimePermissionsActivity.this, requestedPermissions, requestCode);
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                            requestPermissions(requestedPermissions, requestCode);
+                                        }
                                         d.dismiss();
                                     }
                                 })
@@ -107,7 +111,9 @@ public abstract class RuntimePermissionsActivity extends AppCompatActivity {
 
 
             } else {
-                ActivityCompat.requestPermissions(this, requestedPermissions, requestCode);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    requestPermissions(requestedPermissions, requestCode);
+                }
             }
         } else {
             onPermissionsGranted(requestCode);
